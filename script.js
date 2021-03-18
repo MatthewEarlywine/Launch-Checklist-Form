@@ -1,31 +1,39 @@
 // Write your JavaScript code here!
 window.addEventListener("load", function() {
    // alert("Ready to go");
+   function isNumeric(num){
+      return !isNaN(num)
+    };
+   function noSpecialChars(str){
+      return !/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/g.test(str);
+    };
    const form = document.getElementById("launchForm");
    form.addEventListener("submit", function(event){
       // alert("Ready to go");
-      let pilotNameInput = document.querySelector("input[name=pilotName]");
-      let copilotNameInput = document.querySelector("input[name=copilotName]");
-      let fuelLevelInput = document.querySelector("input[name=fuelLevel]");
-      let cargoMassInput = document.querySelector("input[name=cargoMass]");
+      // console.log("ready to go")
+      let pilotNameInput = document.getElementById("pilotName");
+      let copilotNameInput = document.getElementById("copilotName");
+      let fuelLevelInput = document.getElementById("fuelLevel");
+      let cargoMassInput = document.getElementById("cargoMass");
 
-      if (pilotNameInput === null || copilotNameInput === null || fuelLevelInput === null || cargoMassInput === null){
+      if (pilotNameInput.value === "" || copilotNameInput.value === "" || fuelLevelInput.value === "" || 
+      cargoMassInput.value === ""){
          alert("All fields are required!");
          event.preventDefault()
-      }
-      if (typeof(pilotNameInput) !== "string"){
+      } 
+      if (isNumeric(pilotNameInput.value) === true || noSpecialChars(pilotNameInput.value) === false){
          alert("Listed pilot's name is not valid!");
          event.preventDefault()
       }
-      if (typeof(copilotNameInput) !== "string"){
+      if (isNumeric(copilotNameInput.value) === true || noSpecialChars(copilotNameInput.value) === false){
          alert("Listed co-pilot's name is not valid!");
          event.preventDefault()
       }
-      if (isNaN(fuelLevelInput) === true){
+      if (isNumeric(fuelLevelInput.value) === false || noSpecialChars(fuelLevelInput.value) === false){
          alert("Listed fuel level is not a number!");
          event.preventDefault()
       } 
-      if (isNaN(cargoMassInput) === true){
+      if (isNumeric(cargoMassInput.value) === false || noSpecialChars(cargoMassInput.value) === false){
          alert("Listed cargo mass is not a number!");
          event.preventDefault()
       }
