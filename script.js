@@ -43,6 +43,8 @@ window.addEventListener("load", function() {
 
       let launchStatusOutput = document.getElementById("launchStatus");
       let launchChecklist = document.getElementById("faultyItems");
+      let pilotPresence = false;
+      let copilotPresense = false;
       
       if (pilotNameInput.value === "" || copilotNameInput.value === "" || fuelLevelInput.value === "" || 
       cargoMassInput.value === ""){
@@ -69,11 +71,19 @@ window.addEventListener("load", function() {
 
       if (isNumeric(pilotNameInput.value) === false && noSpecialChars(pilotNameInput.value) === true){
          pilotStatusInput.innerHTML = `Pilot ${pilotNameInput.value} is Ready`;
-      } else pilotStatusInput.innerHTML = `Pilot is Not Ready`;
-
+         pilotPresence = true;
+      } else {
+         pilotStatusInput.innerHTML = `Pilot is Not Ready`;
+         launchChecklist.style.visibility = "visible";
+      }
+     
       if (isNumeric(copilotNameInput.value) === false && noSpecialChars(copilotNameInput.value) === true){
-         copilotStatusInput.innerHTML = `Pilot ${copilotNameInput.value} is Ready`;
-      } else copilotStatusInput.innerHTML = `Pilot is Not Ready`;
+         copilotStatusInput.innerHTML = `Copilot ${copilotNameInput.value} is Ready`;
+         copilotPresense = true;
+      } else {
+         copilotStatusInput.innerHTML = `Copilot is Not Ready`;
+         launchChecklist.style.visibility = "visible";
+      }
       
       if (fuelLevelInput.value < 10000){
          launchChecklist.style.visibility = "visible";
@@ -85,19 +95,14 @@ window.addEventListener("load", function() {
          cargoStatusInput.innerHTML = "Too much mass for takeoff.";
        } 
        
-      if (cargoMassInput.value > 10000 || fuelLevelInput.value < 10000){
+      if (cargoMassInput.value > 10000 || fuelLevelInput.value < 10000 || pilotPresence === false || 
+         copilotPresense === false){
          launchStatusOutput.style.color = "red";
          launchStatusOutput.innerHTML = "Shuttle not ready for launch."
       }
 
-       //else {
-      //    launchChecklist.style.visibility = "visible";
-      //    cargoStatusInput.innerHTML = "Cargo mass low enough for launch.";
-      //    launchStatusOutput.innerHTML = "Shuttle ready for launch.";
-      //    launchStatusOutput.style.color = "green";
-      // }
-
-      if (fuelLevelInput.value >= 10000 && cargoMassInput.value <= 10000){
+      if (fuelLevelInput.value >= 10000 && cargoMassInput.value <= 10000 && pilotPresence === true && 
+         copilotPresense === true){
          launchChecklist.style.visibility = "visible";
          fuelStatusInput.innerHTML = "Fuel level high enough for launch."
          cargoStatusInput.innerHTML = "Cargo mass low enough for launch."
