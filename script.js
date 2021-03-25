@@ -65,9 +65,15 @@ window.addEventListener("load", function() {
          alert("Listed cargo mass is not a number!");
          event.preventDefault()
       }
-     
-      pilotStatusInput.innerHTML = `Pilot ${pilotNameInput.value} Ready`;
-      copilotStatusInput.innerHTML = `Copilot ${copilotNameInput.value} Ready`;
+      
+
+      if (isNumeric(pilotNameInput.value) === false && noSpecialChars(pilotNameInput.value) === true){
+         pilotStatusInput.innerHTML = `Pilot ${pilotNameInput.value} is Ready`;
+      } else pilotStatusInput.innerHTML = `Pilot is Not Ready`;
+
+      if (isNumeric(copilotNameInput.value) === false && noSpecialChars(copilotNameInput.value) === true){
+         copilotStatusInput.innerHTML = `Pilot ${copilotNameInput.value} is Ready`;
+      } else copilotStatusInput.innerHTML = `Pilot is Not Ready`;
       
       if (fuelLevelInput.value < 10000){
          launchChecklist.style.visibility = "visible";
