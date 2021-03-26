@@ -50,7 +50,7 @@ window.addEventListener("load", function() {
       if (pilotNameInput.value === "" || copilotNameInput.value === "" || fuelLevelInput.value === "" || 
       cargoMassInput.value === ""){
          alert("All fields are required!");
-      } ;
+      };
       if (isNumeric(pilotNameInput.value) === true || noSpecialChars(pilotNameInput.value) === false){
          alert("Listed pilot's name is not valid!");
       };
@@ -58,9 +58,11 @@ window.addEventListener("load", function() {
          alert("Listed co-pilot's name is not valid!");
       };
       if (isNumeric(fuelLevelInput.value) === false || noSpecialChars(fuelLevelInput.value) === false){
+         fuelStatusInput.innerHTML = `"${fuelLevelInput.value}" is not a valid fuel amount.`
          alert("Listed fuel level is not a number!");
       };
       if (isNumeric(cargoMassInput.value) === false || noSpecialChars(cargoMassInput.value) === false){
+         cargoStatusInput.innerHTML = `"${cargoMassInput.value}" is not a valid cargo amount.`
          alert("Listed cargo mass is not a number!");
       };
       
@@ -95,7 +97,7 @@ window.addEventListener("load", function() {
       if (cargoMassInput.value > 10000){
          launchChecklist.style.visibility = "visible";
          cargoStatusInput.innerHTML = "Too much mass for takeoff.";
-       } else if (cargoMassInput.value = ""){
+       } else if (cargoMassInput.value === ""){
          launchChecklist.style.visibility = "visible";
          cargoStatusInput.innerHTML = "No cargo has been loaded.";
        } else if (cargoMassInput.value <= 10000){
@@ -105,9 +107,10 @@ window.addEventListener("load", function() {
        
       if (cargoMassInput.value > 10000 || fuelLevelInput.value < 10000 || pilotPresence === false || 
          copilotPresense === false){
-         launchStatusOutput.style.color = "red";
-         launchStatusOutput.innerHTML = "Shuttle not ready for launch.";
-      };
+            launchChecklist.style.visibility = "visible";
+            launchStatusOutput.style.color = "red";
+            launchStatusOutput.innerHTML = "Shuttle not ready for launch.";
+         };
 
       if (fuelLevelInput.value >= 10000 && cargoMassInput.value <= 10000 && pilotPresence === true && 
          copilotPresense === true){
@@ -118,12 +121,6 @@ window.addEventListener("load", function() {
          launchStatusOutput.style.color = "green";
       };
       
-      
-      
-      event.preventDefault();
-   
-
-
    }); 
 });  
 
