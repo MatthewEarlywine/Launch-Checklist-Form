@@ -58,11 +58,17 @@ window.addEventListener("load", function() {
          alert("Listed co-pilot's name is not valid!");
       };
       if (isNumeric(fuelLevelInput.value) === false || noSpecialChars(fuelLevelInput.value) === false){
-         fuelStatusInput.innerHTML = `"${fuelLevelInput.value}" is not a valid fuel amount.`
+         fuelStatusInput.innerHTML = `"${fuelLevelInput.value}" is not a valid fuel amount.`;
+         launchChecklist.style.visibility = "visible";
+         launchStatusOutput.style.color = "red";
+         launchStatusOutput.innerHTML = "Shuttle not ready for launch.";
          alert("Listed fuel level is not a number!");
       };
       if (isNumeric(cargoMassInput.value) === false || noSpecialChars(cargoMassInput.value) === false){
-         cargoStatusInput.innerHTML = `"${cargoMassInput.value}" is not a valid cargo amount.`
+         cargoStatusInput.innerHTML = `"${cargoMassInput.value}" is not a valid cargo amount.`;
+         launchChecklist.style.visibility = "visible";
+         launchStatusOutput.style.color = "red";
+         launchStatusOutput.innerHTML = "Shuttle not ready for launch.";
          alert("Listed cargo mass is not a number!");
       };
       
